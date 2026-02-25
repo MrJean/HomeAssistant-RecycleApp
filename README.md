@@ -28,7 +28,7 @@ The formatting is based on [Python date formatting](https://docs.python.org/3/li
 You can also set the `Date Format` as `TIMESTAMP` to display relative dates, such as "in 2 days" or "next week". This option uses Home Assistant's built-in timestamp formatting and localization features.
 
 Additional supported formats:
-- `TODAY_TOMORROW`: shows "Today" or "Tomorrow" (localized by the integration language). All other dates fall back to ISO format.
+- `TODAY_TOMORROW`: shows "Today" or "Tomorrow" (localized by the integration language). All other dates are provided as date values and localized by Home Assistant.
 
 State attributes:
 - `days`: number of days until the pickup (negative for past dates).

@@ -27,7 +27,7 @@
           "zipCode": "Postal Code"
         },
         "data_description": {
-          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime). TODAY_TOMORROW shows Today/Tomorrow; other dates are localized by Home Assistant",
           "format_custom": "Use Python strftime codes",
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
           "recyclingParkZipCode": "Set only if different from your address"
@@ -88,7 +88,7 @@
         },
         "data_description": {
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
-          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime). TODAY_TOMORROW shows Today/Tomorrow; other dates are localized by Home Assistant",
           "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Only if different from your postcode"
         },

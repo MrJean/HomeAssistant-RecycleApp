@@ -119,7 +119,9 @@ class RecycleAppEntity(
         device_class = None
         if is_timestamp:
             device_class = SensorDeviceClass.TIMESTAMP
-        elif not use_today_tomorrow:
+        elif use_today_tomorrow:
+            device_class = SensorDeviceClass.DATE
+        else:
             device_class = SensorDeviceClass.DATE
         self.entity_description = SensorEntityDescription(
             key="RecycleAppEntity",
@@ -148,7 +150,7 @@ class RecycleAppEntity(
 
     @property
     @final
-    def state(self) -> str | None:
+    def state(self) -> str | date | None:
         value = self.native_value
         if value is None:
             return None
@@ -158,7 +160,7 @@ class RecycleAppEntity(
                 return self._today_label
             if delta.days == 1:
                 return self._tomorrow_label
-            return value.strftime(DEFAULT_DATE_FORMAT)
+            return value
         return value.strftime(self._date_format)
 
     @property

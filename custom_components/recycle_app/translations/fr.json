@@ -3,8 +3,7 @@
     "abort": {
       "already_configured": "Cette adresse est d\u00e9j\u00e0 configur\u00e9e"
     },
-          "format_type": "Format de date",
-          "format_custom": "Format de date personnalisé",
+    "error": {
       "invalid_streetname": "Aucune rue trouv\u00e9e, v\u00e9rifiez l'orthographe ou recherchez une autre rue \u00e0 proximit\u00e9",
       "invalid_zipcode": "Aucun code postal trouv\u00e9",
       "register_failed": "Erreur lors de l'initialisation, veuillez r\u00e9essayer"
@@ -12,25 +11,24 @@
     "step": {
       "parks": {
         "data": {
-          "format_type": "Choisissez TIMESTAMP, TODAY_TOMORROW, ou Personnalisé (Python strftime)",
-          "format_custom": "Utilisez les codes Python strftime",
+          "park": "Parcs de Recyclage"
         },
         "description": "Veuillez s\u00e9lectionner vos parcs de recyclage"
       },
       "setup": {
         "data": {
           "entity_id_prefix": "Pr\u00e9fixe de l'ID de l'entit\u00e9 (par exemple, recycle_app ou recycle_app_maison)",
-          "format": "Format de date",
-            "format_type": "Format de date",
-            "format_custom": "Format de date personnalisé",
+          "format_type": "Format de date",
+          "format_custom": "Format de date personnalis\u00e9",
+          "language": "Langue",
           "recyclingParkZipCode": "Code Postal du Recyparc",
           "street": "Rue",
           "streetNumber": "Num\u00e9ro",
           "zipCode": "Code Postal"
         },
-            "format_type": "Choisissez TIMESTAMP, TODAY_TOMORROW, ou Personnalisé (Python strftime)",
-            "format_custom": "Utilisez les codes Python strftime",
-          "format": "Utilisez les codes Python strftime, ou TIMESTAMP / TODAY_TOMORROW",
+        "data_description": {
+          "format_type": "Choisissez TIMESTAMP, TODAY_TOMORROW, ou Personnalis\u00e9 (Python strftime). TODAY_TOMORROW affiche Aujourd'hui/Demain; les autres dates sont localis\u00e9es par Home Assistant",
+          "format_custom": "Utilisez les codes Python strftime",
           "entity_id_prefix": "\u00c0 d\u00e9finir si vous souhaitez que les noms des entit\u00e9s aient un pr\u00e9fixe. Par exemple, sensor.recycleapp_pmd au lieu de sensor.pmd",
           "recyclingParkZipCode": "Seulement si diff\u00e9rent de votre code postal"
         },
@@ -83,13 +81,15 @@
       "init": {
         "data": {
           "entity_id_prefix": "Pr\u00e9fixe de l'ID de l'entit\u00e9 (par exemple, recycle_app ou recycle_app_maison)",
-          "format": "Format de date",
+          "format_type": "Format de date",
+          "format_custom": "Format de date personnalis\u00e9",
           "language": "Langue",
           "recyclingParkZipCode": "Code Postal du Recyparc"
         },
         "data_description": {
           "entity_id_prefix": "\u00c0 d\u00e9finir si vous souhaitez que les noms des entit\u00e9s aient un pr\u00e9fixe. Par exemple, sensor.recycleapp_pmd au lieu de sensor.pmd",
-          "format": "Utilisez les codes Python strftime, ou TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Choisissez TIMESTAMP, TODAY_TOMORROW, ou Personnalis\u00e9 (Python strftime). TODAY_TOMORROW affiche Aujourd'hui/Demain; les autres dates sont localis\u00e9es par Home Assistant",
+          "format_custom": "Utilisez les codes Python strftime",
           "recyclingParkZipCode": "Seulement si diff\u00e9rent de votre code postal"
         },
         "description": "L'int\u00e9gration mettra \u00e0 jour toutes les informations relatives aux collectes lors de la soumission."

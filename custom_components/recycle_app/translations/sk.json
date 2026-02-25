@@ -3,8 +3,7 @@
     "abort": {
       "already_configured": "T\u00e1to adresa je u\u017e nakonfigurovan\u00e1"
     },
-          "format_type": "Formát dátumu",
-          "format_custom": "Vlastný formát dátumu",
+    "error": {
       "invalid_streetname": "Nespr\u00e1vny n\u00e1zov ulice",
       "invalid_zipcode": "Nespr\u00e1vne PS\u010c",
       "register_failed": "Registr\u00e1cia zlyhala, sk\u00faste to znova"
@@ -12,25 +11,24 @@
     "step": {
       "parks": {
         "data": {
-          "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastný (Python strftime)",
-          "format_custom": "Použite Python strftime kódy",
+          "park": "Recykla\u010dn\u00e9 Parky"
         },
         "description": "Vyberte si svoje recykla\u010dn\u00e9 parky"
       },
       "setup": {
         "data": {
           "entity_id_prefix": "Prefix ID entitiy (napr. recycle_app alebo recycle_app_home)",
-          "format": "Form\u00e1t d\u00e1tumu",
-            "format_type": "Formát dátumu",
-            "format_custom": "Vlastný formát dátumu",
+          "format_type": "Form\u00e1t d\u00e1tumu",
+          "format_custom": "Vlastn\u00fd form\u00e1t d\u00e1tumu",
+          "language": "Jazyk",
           "recyclingParkZipCode": "Po\u0161tov\u00e9 smerovacie \u010d\u00edslo (Recykla\u010dn\u00fd park)",
           "street": "N\u00e1zov ulice",
           "streetNumber": "\u010c\u00edslo domu",
           "zipCode": "PS\u010c"
-            "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastný (Python strftime)",
-            "format_custom": "Použite Python strftime kódy",
+        },
         "data_description": {
-          "format": "Pouzite Python strftime kody, alebo TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastn\u00fd (Python strftime). TODAY_TOMORROW zobraz\u00ed Dnes/Zajtra; ostatn\u00e9 d\u00e1tumy lokalizuje Home Assistant",
+          "format_custom": "Pou\u017eite Python strftime k\u00f3dy",
           "entity_id_prefix": "Nastavte, ak chcete, aby n\u00e1zvy ent\u00edt mali prefix. Napr. sensor.recycleapp_pmd namiesto sensor.pmd",
           "recyclingParkZipCode": "Nastavi\u0165 len vtedy, ak sa l\u00ed\u0161i od va\u0161ej adresy"
         },
@@ -83,19 +81,21 @@
       "init": {
         "data": {
           "entity_id_prefix": "Prefix ID entitiy (napr. recycle_app alebo recycle_app_home)",
-          "format": "Form\u00e1t d\u00e1tumu",
+          "format_type": "Form\u00e1t d\u00e1tumu",
+          "format_custom": "Vlastn\u00fd form\u00e1t d\u00e1tumu",
           "language": "Jazyk",
           "recyclingParkZipCode": "Po\u0161tov\u00e9 smerovacie \u010d\u00edslo (Recykla\u010dn\u00fd park)"
         },
         "data_description": {
-          "format": "Pouzite Python strftime kody, alebo TIMESTAMP / TODAY_TOMORROW",
+          "entity_id_prefix": "Nastavte, ak chcete, aby n\u00e1zvy ent\u00edt mali prefix. Napr. sensor.recycleapp_pmd namiesto sensor.pmd",
+          "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastn\u00fd (Python strftime). TODAY_TOMORROW zobraz\u00ed Dnes/Zajtra; ostatn\u00e9 d\u00e1tumy lokalizuje Home Assistant",
+          "format_custom": "Pou\u017eite Python strftime k\u00f3dy",
           "recyclingParkZipCode": "Nastavi\u0165 len vtedy, ak sa l\u00ed\u0161i od va\u0161ej adresy"
         },
         "description": "Integr\u00e1cia aktualizuje v\u0161etky inform\u00e1cie o kolekcii pri odoslan\u00ed."
       },
       "parks": {
-        "description": "Vyberte si svoje recykla\u010dn\u00e9 parky",
-        "entity_id_prefix": "Nastavte, ak chcete, aby n\u00e1zvy ent\u00edt mali prefix. Napr. sensor.recycleapp_pmd namiesto sensor.pmd"
+        "description": "Vyberte si svoje recykla\u010dn\u00e9 parky"
       }
     }
   }

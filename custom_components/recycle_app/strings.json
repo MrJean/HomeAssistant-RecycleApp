@@ -13,7 +13,7 @@
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
-          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime). TODAY_TOMORROW shows Today/Tomorrow; other dates are localized by Home Assistant",
           "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Set only if different from your address"
         }
@@ -82,7 +82,7 @@
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
-          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime). TODAY_TOMORROW shows Today/Tomorrow; other dates are localized by Home Assistant",
           "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Only if different from your postcode"
         }

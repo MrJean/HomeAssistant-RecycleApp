@@ -26,6 +26,7 @@
           "zipCode": "Postcode"
         },
         "data_description": {
+          "format": "Gebruik Python strftime codes, of TIMESTAMP / TODAY_TOMORROW",
           "entity_id_prefix": "Stel in wanneer u wenst dat de entiteitsnamen een prefix hebben. Bijvoorbeeld sensor.recycle_app_pmd in plaats van sensor.pmd",
           "recyclingParkZipCode": "Alleen als deze afwijkt van je postcode"
         },
@@ -64,6 +65,12 @@
       }
     }
   },
+  "state": {
+    "recycle_app": {
+      "today": "Vandaag",
+      "tomorrow": "Morgen"
+    }
+  },
   "options": {
     "error": {
       "unknown": "Unknown error"
@@ -78,6 +85,7 @@
         },
         "data_description": {
           "entity_id_prefix": "Stel in wanneer u wenst dat de entiteitsnamen een prefix hebben. Bijvoorbeeld sensor.recycle_app_pmd in plaats van sensor.pmd",
+          "format": "Gebruik Python strftime codes, of TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Alleen als deze afwijkt van je postcode"
         },
         "description": "De integratie zal alle informatie over afvalinzameling bijwerken op het moment van indiening."

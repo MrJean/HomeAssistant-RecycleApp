@@ -26,6 +26,7 @@
           "zipCode": "Code Postal"
         },
         "data_description": {
+          "format": "Utilisez les codes Python strftime, ou TIMESTAMP / TODAY_TOMORROW",
           "entity_id_prefix": "\u00c0 d\u00e9finir si vous souhaitez que les noms des entit\u00e9s aient un pr\u00e9fixe. Par exemple, sensor.recycleapp_pmd au lieu de sensor.pmd",
           "recyclingParkZipCode": "Seulement si diff\u00e9rent de votre code postal"
         },
@@ -64,6 +65,12 @@
       }
     }
   },
+  "state": {
+    "recycle_app": {
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain"
+    }
+  },
   "options": {
     "error": {
       "unknown": "Erreur inconnue"
@@ -78,6 +85,7 @@
         },
         "data_description": {
           "entity_id_prefix": "\u00c0 d\u00e9finir si vous souhaitez que les noms des entit\u00e9s aient un pr\u00e9fixe. Par exemple, sensor.recycleapp_pmd au lieu de sensor.pmd",
+          "format": "Utilisez les codes Python strftime, ou TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Seulement si diff\u00e9rent de votre code postal"
         },
         "description": "L'int\u00e9gration mettra \u00e0 jour toutes les informations relatives aux collectes lors de la soumission."

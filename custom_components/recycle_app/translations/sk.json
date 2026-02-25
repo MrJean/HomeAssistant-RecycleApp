@@ -26,6 +26,7 @@
           "zipCode": "PS\u010c"
         },
         "data_description": {
+          "format": "Pouzite Python strftime kody, alebo TIMESTAMP / TODAY_TOMORROW",
           "entity_id_prefix": "Nastavte, ak chcete, aby n\u00e1zvy ent\u00edt mali prefix. Napr. sensor.recycleapp_pmd namiesto sensor.pmd",
           "recyclingParkZipCode": "Nastavi\u0165 len vtedy, ak sa l\u00ed\u0161i od va\u0161ej adresy"
         },
@@ -64,6 +65,12 @@
       }
     }
   },
+  "state": {
+    "recycle_app": {
+      "today": "Dnes",
+      "tomorrow": "Zajtra"
+    }
+  },
   "options": {
     "error": {
       "unknown": "Nezn\u00e1ma chyba"
@@ -77,6 +84,7 @@
           "recyclingParkZipCode": "Po\u0161tov\u00e9 smerovacie \u010d\u00edslo (Recykla\u010dn\u00fd park)"
         },
         "data_description": {
+          "format": "Pouzite Python strftime kody, alebo TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Nastavi\u0165 len vtedy, ak sa l\u00ed\u0161i od va\u0161ej adresy"
         },
         "description": "Integr\u00e1cia aktualizuje v\u0161etky inform\u00e1cie o kolekcii pri odoslan\u00ed."

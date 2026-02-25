@@ -12,6 +12,7 @@
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
+          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Set only if different from your address"
         }
       },
@@ -62,6 +63,12 @@
       }
     }
   },
+  "state": {
+    "recycle_app": {
+      "today": "Today",
+      "tomorrow": "Tomorrow"
+    }
+  },
   "options": {
     "step": {
       "init": {
@@ -72,6 +79,7 @@
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
+          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Only if different from your postcode"
         }
       },

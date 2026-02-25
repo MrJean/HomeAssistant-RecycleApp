@@ -26,6 +26,7 @@
           "zipCode": "Postal Code"
         },
         "data_description": {
+          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
           "recyclingParkZipCode": "Set only if different from your address"
         },
@@ -64,6 +65,12 @@
       }
     }
   },
+  "state": {
+    "recycle_app": {
+      "today": "Today",
+      "tomorrow": "Tomorrow"
+    }
+  },
   "options": {
     "error": {
       "unknown": "Unknown error"
@@ -78,6 +85,7 @@
         },
         "data_description": {
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
+          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
           "recyclingParkZipCode": "Only if different from your postcode"
         },
         "description": "The integration will update all collection information upon submission."

@@ -1,6 +1,6 @@
 """RecycleApp sensor."""
 
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from typing import Any, final
 
 from homeassistant import config_entries
@@ -12,10 +12,12 @@ from homeassistant.components.sensor import (
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.translation import async_get_translations
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
+from homeassistant.util import dt as dt_util
 from homeassistant.util import slugify
 
 from .api import FostPlusApi
@@ -34,6 +36,9 @@ async def async_setup_entry(
     unique_id = app_info["unique_id"]
     date_format: str = config_entry.options.get("format", DEFAULT_DATE_FORMAT)
     language: str = config_entry.options.get("language", "fr")
+    translations = await async_get_translations(hass, language, "state")
+    today_label = translations.get(f"state.{DOMAIN}.today", "Today")
+    tomorrow_label = translations.get(f"state.{DOMAIN}.tomorrow", "Tomorrow")
     entity_id_prefix: str = config_entry.options.get("entity_id_prefix", "")
     entities = [
         RecycleAppEntity(
@@ -44,6 +49,8 @@ async def async_setup_entry(
             name,
             app_info["collect_device"],
             date_format,
+            today_label,
+            tomorrow_label,
             entity_id_prefix,
         )
         for (fraction, (color, name)) in fractions.items()
@@ -100,25 +107,35 @@ class RecycleAppEntity(
         name: str,
         device_info: dict[str, Any] | None = None,
         date_format=DEFAULT_DATE_FORMAT,
+        today_label: str | None = None,
+        tomorrow_label: str | None = None,
         entity_id_prefix: str = "",  # Default to an empty string
     ) -> None:
         """Initialize the entity."""
         super().__init__(coordinator)
-        is_timestamp = date_format == "TIMESTAMP"
+        date_format_upper = date_format.upper()
+        is_timestamp = date_format_upper == "TIMESTAMP"
+        use_today_tomorrow = date_format_upper == "TODAY_TOMORROW"
+        device_class = None
+        if is_timestamp:
+            device_class = SensorDeviceClass.TIMESTAMP
+        elif not use_today_tomorrow:
+            device_class = SensorDeviceClass.DATE
         self.entity_description = SensorEntityDescription(
             key="RecycleAppEntity",
             name=name,
             icon="mdi:trash-can",
-            device_class=(
-                SensorDeviceClass.TIMESTAMP if is_timestamp else SensorDeviceClass.DATE
-            ),
+            device_class=device_class,
         )
         self._attr_unique_id = unique_id
         self._fraction = fraction
         self._attr_entity_picture = get_icon(fraction, color)
         self._attr_device_info = device_info
-        self._attr_extra_state_attributes = {"days": None}
+        self._attr_extra_state_attributes = {"days": None, "date": None}
         self._date_format = date_format if not is_timestamp else DEFAULT_DATE_FORMAT
+        self._use_today_tomorrow = use_today_tomorrow
+        self._today_label = today_label or "Today"
+        self._tomorrow_label = tomorrow_label or "Tomorrow"
 
         # Handle entity_id prefix using slugify
         prefix = (
@@ -135,7 +152,13 @@ class RecycleAppEntity(
         value = self.native_value
         if value is None:
             return None
-
+        if self._use_today_tomorrow:
+            delta = value - dt_util.now().date()
+            if delta.days == 0:
+                return self._today_label
+            if delta.days == 1:
+                return self._tomorrow_label
+            return value.strftime(DEFAULT_DATE_FORMAT)
         return value.strftime(self._date_format)
 
     @property
@@ -158,9 +181,13 @@ class RecycleAppEntity(
     def async_write_ha_state(self) -> None:
         value = self.native_value
         if value:
-            delta: timedelta = value - datetime.now().date()
+            delta: timedelta = value - dt_util.now().date()
             self._attr_extra_state_attributes["days"] = delta.days
+            self._attr_extra_state_attributes["date"] = value.strftime(
+                DEFAULT_DATE_FORMAT
+            )
         else:
             self._attr_extra_state_attributes["days"] = None
+            self._attr_extra_state_attributes["date"] = None
 
         super().async_write_ha_state()

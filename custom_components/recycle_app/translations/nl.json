@@ -18,7 +18,8 @@
       "setup": {
         "data": {
           "entity_id_prefix": "Entity ID prefix (bv recycle_app of recycle_app_thuis)",
-          "format": "Datumformaat",
+          "format_type": "Datumformaat",
+          "format_custom": "Aangepast datumformaat",
           "language": "Taal",
           "recyclingParkZipCode": "Postcode (Recycling park)",
           "street": "Straatnaam",
@@ -26,7 +27,8 @@
           "zipCode": "Postcode"
         },
         "data_description": {
-          "format": "Gebruik Python strftime codes, of TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Kies TIMESTAMP, TODAY_TOMORROW, of Aangepast (Python strftime)",
+          "format_custom": "Gebruik Python strftime codes",
           "entity_id_prefix": "Stel in wanneer u wenst dat de entiteitsnamen een prefix hebben. Bijvoorbeeld sensor.recycle_app_pmd in plaats van sensor.pmd",
           "recyclingParkZipCode": "Alleen als deze afwijkt van je postcode"
         },
@@ -79,13 +81,15 @@
       "init": {
         "data": {
           "entity_id_prefix": "Entity ID prefix (bv recycle_app of recycle_app_thuis)",
-          "format": "Datumformaat",
+          "format_type": "Datumformaat",
+          "format_custom": "Aangepast datumformaat",
           "language": "Taal",
           "recyclingParkZipCode": "Postcode (Recycling park)"
         },
         "data_description": {
           "entity_id_prefix": "Stel in wanneer u wenst dat de entiteitsnamen een prefix hebben. Bijvoorbeeld sensor.recycle_app_pmd in plaats van sensor.pmd",
-          "format": "Gebruik Python strftime codes, of TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Kies TIMESTAMP, TODAY_TOMORROW, of Aangepast (Python strftime)",
+          "format_custom": "Gebruik Python strftime codes",
           "recyclingParkZipCode": "Alleen als deze afwijkt van je postcode"
         },
         "description": "De integratie zal alle informatie over afvalinzameling bijwerken op het moment van indiening."

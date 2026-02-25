@@ -8,11 +8,13 @@
           "street": "Streetname",
           "streetNumber": "House number",
           "language": "Language",
-          "format": "Date Format",
+          "format_type": "Date Format",
+          "format_custom": "Custom Date Format",
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
-          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Set only if different from your address"
         }
       },
@@ -75,11 +77,13 @@
         "description": "The integration will update all collection information upon submission.",
         "data": {
           "language": "Language",
-          "format": "Date Format",
+          "format_type": "Date Format",
+          "format_custom": "Custom Date Format",
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
-          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Only if different from your postcode"
         }
       },

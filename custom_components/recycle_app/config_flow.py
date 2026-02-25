@@ -29,6 +29,8 @@ class RecycleAppConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._parks = {}
         self._zip_codes = []
         self._saved_steps = []
+        self._pending_setup_info: dict[str, Any] | None = None
+        self._pending_setup_zip_code: tuple[str, str] | None = None
 
     @staticmethod
     @callback
@@ -97,6 +99,17 @@ class RecycleAppConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if info is not None:
             try:
+                format_type = info.get("format_type") or info.get("format") or "strftime"
+                if format_type == "strftime" and "format_custom" not in info:
+                    self._pending_setup_info = info
+                    self._pending_setup_zip_code = selected_zip_code
+                    return await self.async_step_format()
+
+                date_format = (
+                    info.get("format_custom", DEFAULT_DATE_FORMAT)
+                    if format_type == "strftime"
+                    else format_type
+                )
                 api = FostPlusApi()
                 language: str = info["language"]
                 entity_id_prefix: str = info["entity_id_prefix"]
@@ -117,7 +130,6 @@ class RecycleAppConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     api.get_street, info["street"], zip_code_id, language
                 )
                 house_number: int = info["streetNumber"]
-                date_format: str = info.get("format", DEFAULT_DATE_FORMAT)
                 fractions = await self.hass.async_add_executor_job(
                     api.get_fractions, zip_code_id, street_id, house_number, language
                 )
@@ -185,7 +197,18 @@ class RecycleAppConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             }
                         }
                     ),
-                    vol.Required("format", default=DEFAULT_DATE_FORMAT): str,
+                    vol.Required("format_type", default="strftime"): selector(
+                        {
+                            "select": {
+                                "options": [
+                                    {"label": "Custom (Python strftime)", "value": "strftime"},
+                                    {"label": "TIMESTAMP", "value": "TIMESTAMP"},
+                                    {"label": "TODAY_TOMORROW", "value": "TODAY_TOMORROW"},
+                                ],
+                                "mode": "dropdown",
+                            }
+                        }
+                    ),
                     vol.Optional(
                         "recyclingParkZipCode",
                     ): OptionalInt(),
@@ -193,6 +216,25 @@ class RecycleAppConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 }
             ),
             errors=errors,
+        )
+
+    async def async_step_format(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Handle the custom date format step."""
+        if user_input is not None:
+            info = {**(self._pending_setup_info or {}), "format_custom": user_input["format_custom"]}
+            pending_zip_code = self._pending_setup_zip_code
+            self._pending_setup_info = None
+            self._pending_setup_zip_code = None
+            return await self.async_step_setup(info, pending_zip_code)
+
+        return self.async_show_form(
+            step_id="format",
+            data_schema=vol.Schema(
+                {
+                    vol.Required("format_custom", default=DEFAULT_DATE_FORMAT): str,
+                }
+            ),
+            last_step=False,
         )
 
     async def async_step_parks(self, user_input: dict[str, Any] | None = None):
@@ -249,18 +291,28 @@ class RecycleAppOptionsFlowHandler(config_entries.OptionsFlow):
         """Initialize options flow."""
         self._parks = None
         self._data = None
+        self._pending_options_info: dict[str, Any] | None = None
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Manage the options."""
         if user_input is not None:
+            format_type = user_input.get("format_type") or user_input.get("format") or "strftime"
+            if format_type == "strftime" and "format_custom" not in user_input:
+                self._pending_options_info = user_input
+                return await self.async_step_format()
+
+            date_format = (
+                user_input.get("format_custom", DEFAULT_DATE_FORMAT)
+                if format_type == "strftime"
+                else format_type
+            )
             api = FostPlusApi()
             zip_code_id = self.config_entry.data.get("zipCodeId")
             street_id = self.config_entry.data.get("streetId")
             house_umber = self.config_entry.data.get("houseNumber")
             language = user_input.get("language", "fr")
-            date_format = user_input.get("format", DEFAULT_DATE_FORMAT)
             fractions = await self.hass.async_add_executor_job(
                 api.get_fractions, zip_code_id, street_id, house_umber, language
             )
@@ -292,9 +344,18 @@ class RecycleAppOptionsFlowHandler(config_entries.OptionsFlow):
                 data=self._data,
             )
 
+        existing_format = self.config_entry.options.get("format", DEFAULT_DATE_FORMAT)
+        if existing_format in {"TIMESTAMP", "TODAY_TOMORROW"}:
+            format_type = existing_format
+            format_custom = DEFAULT_DATE_FORMAT
+        else:
+            format_type = "strftime"
+            format_custom = existing_format
+
         self.initial_data = {
             "language": self.config_entry.options.get("language", "fr"),
-            "format": self.config_entry.options.get("format", DEFAULT_DATE_FORMAT),
+            "format_type": format_type,
+            "format_custom": format_custom,
             "recyclingParkZipCode": str(self.config_entry.options.get("recyclingParkZipCode", "")).partition("-")[0],
             "entity_id_prefix": self.config_entry.options.get("entity_id_prefix", ""),
         }
@@ -312,12 +373,43 @@ class RecycleAppOptionsFlowHandler(config_entries.OptionsFlow):
                                 }
                             }
                         ),
-                        vol.Required("format"): str,
+                        vol.Required("format_type"): selector(
+                            {
+                                "select": {
+                                    "options": [
+                                        {"label": "Custom (Python strftime)", "value": "strftime"},
+                                        {"label": "TIMESTAMP", "value": "TIMESTAMP"},
+                                        {"label": "TODAY_TOMORROW", "value": "TODAY_TOMORROW"},
+                                    ],
+                                    "mode": "dropdown",
+                                }
+                            }
+                        ),
                         vol.Optional("recyclingParkZipCode"): OptionalInt(),
                         vol.Optional("entity_id_prefix"): str,
                     }
                 ),
                 self.initial_data,
+            ),
+            last_step=False,
+        )
+
+    async def async_step_format(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Handle the custom date format step for options."""
+        if user_input is not None:
+            info = {**(self._pending_options_info or {}), "format_custom": user_input["format_custom"]}
+            self._pending_options_info = None
+            return await self.async_step_init(info)
+
+        return self.async_show_form(
+            step_id="format",
+            data_schema=self.add_suggested_values_to_schema(
+                vol.Schema(
+                    {
+                        vol.Required("format_custom"): str,
+                    }
+                ),
+                {"format_custom": self.initial_data.get("format_custom", DEFAULT_DATE_FORMAT)},
             ),
             last_step=False,
         )

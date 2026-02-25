@@ -3,7 +3,8 @@
     "abort": {
       "already_configured": "T\u00e1to adresa je u\u017e nakonfigurovan\u00e1"
     },
-    "error": {
+          "format_type": "Formát dátumu",
+          "format_custom": "Vlastný formát dátumu",
       "invalid_streetname": "Nespr\u00e1vny n\u00e1zov ulice",
       "invalid_zipcode": "Nespr\u00e1vne PS\u010c",
       "register_failed": "Registr\u00e1cia zlyhala, sk\u00faste to znova"
@@ -11,7 +12,8 @@
     "step": {
       "parks": {
         "data": {
-          "park": "Recykla\u010dn\u00e9 Parky"
+          "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastný (Python strftime)",
+          "format_custom": "Použite Python strftime kódy",
         },
         "description": "Vyberte si svoje recykla\u010dn\u00e9 parky"
       },
@@ -19,12 +21,14 @@
         "data": {
           "entity_id_prefix": "Prefix ID entitiy (napr. recycle_app alebo recycle_app_home)",
           "format": "Form\u00e1t d\u00e1tumu",
-          "language": "Jazyk",
+            "format_type": "Formát dátumu",
+            "format_custom": "Vlastný formát dátumu",
           "recyclingParkZipCode": "Po\u0161tov\u00e9 smerovacie \u010d\u00edslo (Recykla\u010dn\u00fd park)",
           "street": "N\u00e1zov ulice",
           "streetNumber": "\u010c\u00edslo domu",
           "zipCode": "PS\u010c"
-        },
+            "format_type": "Vyberte TIMESTAMP, TODAY_TOMORROW alebo Vlastný (Python strftime)",
+            "format_custom": "Použite Python strftime kódy",
         "data_description": {
           "format": "Pouzite Python strftime kody, alebo TIMESTAMP / TODAY_TOMORROW",
           "entity_id_prefix": "Nastavte, ak chcete, aby n\u00e1zvy ent\u00edt mali prefix. Napr. sensor.recycleapp_pmd namiesto sensor.pmd",

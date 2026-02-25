@@ -18,7 +18,8 @@
       "setup": {
         "data": {
           "entity_id_prefix": "Entity ID prefix (e.g. recycle_app of recycle_app_home)",
-          "format": "Date Format",
+          "format_type": "Date Format",
+          "format_custom": "Custom Date Format",
           "language": "Language",
           "recyclingParkZipCode": "Postal Code (Recycling Park)",
           "street": "Streetname",
@@ -26,7 +27,8 @@
           "zipCode": "Postal Code"
         },
         "data_description": {
-          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_custom": "Use Python strftime codes",
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
           "recyclingParkZipCode": "Set only if different from your address"
         },
@@ -79,13 +81,15 @@
       "init": {
         "data": {
           "entity_id_prefix": "Entity ID prefix (e.g. recycle_app of recycle_app_home)",
-          "format": "Date Format",
+          "format_type": "Date Format",
+          "format_custom": "Custom Date Format",
           "language": "Language",
           "recyclingParkZipCode": "Postal Code (Recycling Park)"
         },
         "data_description": {
           "entity_id_prefix": "Set if you would like the entity names being prefixed. E.g. sensor.recycleapp_pmd instead of sensor.pmd",
-          "format": "Use Python strftime codes, or TIMESTAMP / TODAY_TOMORROW",
+          "format_type": "Choose TIMESTAMP, TODAY_TOMORROW, or Custom (Python strftime)",
+          "format_custom": "Use Python strftime codes",
           "recyclingParkZipCode": "Only if different from your postcode"
         },
         "description": "The integration will update all collection information upon submission."
